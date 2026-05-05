@@ -1,0 +1,20 @@
+userName: ${BROWSERSTACK_USER}
+accessKey: ${BROWSERSTACK_KEY}
+platforms:
+  - browserName: Safari
+    os: OS X
+    osVersion: Monterey
+    browserVersion: 15.6
+parallelsPerPlatform: 4
+browserstackLocal: false
+buildName: ${BROWSERSTACK_BUILD}
+projectName: ${BROWSERSTACK_PROJECT}
+testContextOptions:
+  skipSessionName: true
+buildIdentifier: null
+autoWait: 60
+debug: false
+networkLogs: false
+consoleLogs: errors
+testObservability: false
+browserstackAutomation: ${BROWSERSTACK_ENABLED}

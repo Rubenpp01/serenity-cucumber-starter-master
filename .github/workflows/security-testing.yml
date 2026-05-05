@@ -1,0 +1,23 @@
+name: security-testing-integration
+# Este pipeline ejecuta las validaciones de seguridad de OWASP (aplicaciones web).
+# IMPORTANTE: Este pipeline no se ejecuta de forma automática, para su ejecución se debe dar clic en Run-workflow desde Github
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        type: string
+        description: Ingrese el release-id del RLO generado por STEWARD
+        required: true
+
+jobs:
+  integration-security-tests:
+    uses: bancodebogota/bbog-dig-do-testing-pipeline/.github/workflows/test_security_integration.yml@v7
+    with:
+      repository: 'bbog-xxxx-xxxxxx-automated-testing' # Nombre del repositorio tal cual en Github, ejemplo bbog-prtf-portafolios-automated-testing
+      target-url-zap: 'https://prueba.prueba.com' # url del portal web
+      release-id-steward: ${{ inputs.release_id }}
+      prefix-team: 'xxxx' # Prefijo del equipo tal cual está en Agile Teams y en Github, ejemplo: prtf
+      environment: 'st' # ambiente de ejecución (staging). Dato opcional
+    secrets:
+      DIG_READER_GITHUB_ACCESS_TOKEN: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
